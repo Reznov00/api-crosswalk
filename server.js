@@ -1,11 +1,13 @@
 const { default: axios } = require("axios");
 const express = require("express");
+const cors = require("cors"); // Import cors middleware
 require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
+app.use(cors()); // Use cors middleware to allow all origins
 
 app.get("/", (req, res) => {
   res.send("SERVER LIVE");
