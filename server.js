@@ -9,13 +9,8 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors()); // Use cors middleware to allow all origins
 
-<<<<<<< HEAD
-app.get("/", () => {
-  console.log("SERVER IS LIVE");
-=======
 app.get("/", (req, res) => {
   res.send("SERVER LIVE");
->>>>>>> 63912ab6caf6a2eb142c8c0f69a890977bdde180
 });
 
 // Routes
