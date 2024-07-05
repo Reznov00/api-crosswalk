@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 
 app.get("/", () => {
-  console.log("RSERSER");
+  console.log("SERVER LIVE");
 });
 
 // Routes
