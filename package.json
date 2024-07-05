@@ -1,0 +1,21 @@
+{
+  "name": "crosswalk-api",
+  "version": "1.0.0",
+  "description": "API for ID2LSagax Crosswalk",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server",
+    "start": "nodemon server"
+  },
+  "author": "Aamir Rasheed",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
