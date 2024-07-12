@@ -13,15 +13,14 @@ app.get("/", (req, res) => {
   res.send("SERVER LIVE");
 });
 
-
 app.use(
   cors({
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
-  }),
-)
+  })
+);
 // Routes
 app.get("/institutions", async (req, res) => {
   try {
@@ -51,11 +50,70 @@ app.post("/courses", async (req, res) => {
 app.post("/search", async (req, res) => {
   const { institution_id, course_code } = req.body;
   try {
-    const response = await axios.post(
-      `${process.env.PYTHON_API_URL}/search`,
-      { institution_id, course_code }
-    );
+    const response = await axios.post(`${process.env.PYTHON_API_URL}/search`, {
+      institution_id,
+      course_code,
+    });
     res.status(200).json(response.data);
+  } catch (error) {
+    res.status(400).json({ error: "Failed to search courses" });
+  }
+});
+
+app.post("/search_all", async (req, res) => {
+  const { course_code, title, description } = req.body;
+  try {
+    if (course_code > "" && title > "" && description > "") {
+      const response = await axios.post(
+        `${process.env.PYTHON_API_URL}/search_all`,
+        {
+          course_code,
+          title,
+          description,
+        }
+      );
+      res.status(200).json(response.data);
+    } else {
+      res.status(400).json({ error: "Missing data" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error });
+  }
+});
+
+app.post("/compare_courses", async (req, res) => {
+  const {
+    course1_code,
+    course1_title,
+    course1_description,
+    course2_code,
+    course2_title,
+    course2_description,
+  } = req.body;
+  try {
+    if (
+      course1_code > "" &&
+      course1_title > "" &&
+      course1_description > "" &&
+      course2_code > "" &&
+      course2_title > "" &&
+      course2_description > ""
+    ) {
+      const response = await axios.post(
+        `${process.env.PYTHON_API_URL}/compare_courses`,
+        {
+          course1_code,
+          course1_title,
+          course1_description,
+          course2_code,
+          course2_title,
+          course2_description,
+        }
+      );
+      res.status(200).json(response.data);
+    } else {
+      res.status(400).json({ error: "Missing data" });
+    }
   } catch (error) {
     res.status(400).json({ error: "Failed to search courses" });
   }
