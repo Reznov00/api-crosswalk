@@ -90,14 +90,22 @@ app.post("/compare_courses", async (req, res) => {
     course2_title,
     course2_description,
   } = req.body;
+  console.log({
+    course1_code,
+    course1_title,
+    course1_description,
+    course2_code,
+    course2_title,
+    course2_description,
+  });
   try {
     if (
-      course1_code > "" &&
-      course1_title > "" &&
-      course1_description > "" &&
-      course2_code > "" &&
-      course2_title > "" &&
-      course2_description > ""
+      course1_code &&
+      course1_title &&
+      course1_description &&
+      course2_code &&
+      course2_title &&
+      course2_description
     ) {
       const response = await axios.post(
         `${process.env.PYTHON_API_URL}/compare_courses`,
